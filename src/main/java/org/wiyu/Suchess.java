@@ -14,14 +14,14 @@ public class Suchess {
     public static void main(String[] args) {
         ChessPiece[][] board = new ChessPiece[BOARD_HEIGHT][BOARD_LENGTH];
 
-        board[0][0] = board[0][7] = new Rook(Color.WHITE);
-        board[7][0] = board[7][7] = new Rook(Color.BLACK);
+        board[0][0] = new Rook(Color.BLACK); board[0][7] = new Rook(Color.BLACK);
+        board[7][0] = new Rook(Color.WHITE); board[7][7] = new Rook(Color.WHITE);
 
-        board[0][1] = board[0][6] = new Knight(Color.WHITE);
-        board[7][1] = board[7][6] = new Knight(Color.BLACK);
+        board[0][1] = new Knight(Color.BLACK); board[0][6] = new Knight(Color.BLACK);
+        board[7][1] = new Knight(Color.WHITE); board[7][6] = new Knight(Color.WHITE);
 
-        board[0][2] = board[0][5] = new Bishop(Color.WHITE);
-        board[7][2] = board[7][5] = new Bishop(Color.BLACK);
+        board[0][2] = new Bishop(Color.BLACK); board[0][5] = new Bishop(Color.BLACK);
+        board[7][2] = new Bishop(Color.WHITE); board[7][5] = new Bishop(Color.WHITE);
 
         for (int x=0; x<board[0].length; x++) {
             board[1][x] = new Pawn(Color.BLACK);
@@ -42,7 +42,10 @@ public class Suchess {
 
         Scanner reader = new Scanner(System.in);
 
-        board[6][3].movePiece(4,5,board);
+        board[6][0].movePiece(0,4,board);
+        board[1][1].movePiece(1,3,board);
+        board[4][0].movePiece(1,3,board);
+        board[7][0].movePiece(0,1,board);
 
         translateBoard(board);
     }

@@ -28,10 +28,10 @@ public abstract class ChessPiece {
         if (isLegal(x,y,board)) {
             board[y][x] = this;
             board[this.y][this.x] = null;
-            board[y][x].y = y;
-            board[y][x].x = x;
+            this.y = y;
+            this.x = x;
         }
-    }
+    } // piece moving logic is the same for all pieces
 
     protected abstract boolean isLegal(int x, int y, ChessPiece[][] board);
 }
@@ -49,8 +49,8 @@ class Pawn extends ChessPiece implements Promotable {
         }
 
         if (this.color==Color.WHITE) {
-            if (board[y][x] == null) {
-                if (x==this.x && y==this.y-1) {
+            if (board[y][x] == null && x==this.x) {
+                if (y==this.y-1) {
                     return true;
                 } else if (this.y==6 && y==this.y-2) {
                     return true;
@@ -59,10 +59,10 @@ class Pawn extends ChessPiece implements Promotable {
                 return true;
             }
         } else if (this.color==Color.BLACK) {
-            if (board[y][x] == null) {
+            if (board[y][x] == null && x==this.x) {
                 if (this.y==1 && y==this.y+2) {
                     return true;
-                } else if (x==this.x && y==this.y+1) {
+                } else if (y==this.y+1) {
                     return true;
                 }
             } else {
@@ -100,7 +100,55 @@ class Rook extends ChessPiece {
         if (outOfBounds(x,y)) {
             return false;
         }
-        return true;
+        return this.checkLines(x,y,board);
+    }
+
+    private boolean checkLines(int x, int y, ChessPiece[][] board) {
+        if (x!=this.x && y!=this.y) {
+            System.out.println("Case 1");
+            return false;
+        }
+
+        if (x==this.x) {
+            if (y<this.y) {
+                for (int i=this.y-1; i!=y; i--) {
+                    if (board[i][this.x] != null) {
+                        System.out.println("Case 2");
+                        System.out.println(board[i][this.x].y);
+                        return false;
+                    }
+                }
+            } else {
+                for (int i=this.y+1; i!=y; i++) {
+                    if (board[i][this.x] != null) {
+                        System.out.println("Case 3");
+                        return false;
+                    }
+                }
+            }
+        } else if (y==this.y) {
+            if (x<this.x) {
+                for (int i=this.x-1; i!=x; i--) {
+                    if (board[this.y][i] != null) {
+                        System.out.println("Case 4");
+                        return false;
+                    }
+                }
+            } else {
+                for (int i=this.x+1; i!=x; i++) {
+                    if (board[this.y][i] != null) {
+                        System.out.println("Case 5");
+                        return false;
+                    }
+                }
+            }
+        }
+
+        if ((board[y][x] == null) || (board[y][x].color != this.color)) {
+            return true;
+        }
+
+        return false;
     }
 }
 

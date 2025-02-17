@@ -1,5 +1,7 @@
 package org.wiyu;
 
+import org.wiyu.enums.Color;
+
 public class StaticMethods {
     public static boolean outOfBounds(int x, int y) {
         if ((x<0 || x>7) || (y<0 || y>7)) {
@@ -26,6 +28,11 @@ public class StaticMethods {
         for (int y=0; y<board.length; y++) {
             for (int x=0; x<board[y].length; x++) {
                 if (board[y][x] != null) {
+                    if (board[y][x].color == Color.BLACK) {
+                        System.out.print("B");
+                    } else {
+                        System.out.print("W");
+                    }
                     System.out.print("X ");
                 } else {
                     System.out.print("  ");
