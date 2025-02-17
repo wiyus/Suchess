@@ -42,7 +42,7 @@ public class Suchess {
 
         Scanner reader = new Scanner(System.in);
 
-        board[6][3].movePiece(3,5,board);
+        board[6][3].movePiece(4,5,board);
 
         translateBoard(board);
     }

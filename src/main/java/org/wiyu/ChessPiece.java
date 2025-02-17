@@ -24,7 +24,15 @@ public abstract class ChessPiece {
         this.y = y;
     }
 
-    public abstract void movePiece(int x, int y, ChessPiece[][] board);
+    public void movePiece(int x, int y, ChessPiece[][] board) {
+        if (isLegal(x,y,board)) {
+            board[y][x] = this;
+            board[this.y][this.x] = null;
+            board[y][x].y = y;
+            board[y][x].x = x;
+        }
+    }
+
     protected abstract boolean isLegal(int x, int y, ChessPiece[][] board);
 }
 
@@ -38,32 +46,33 @@ class Pawn extends ChessPiece implements Promotable {
         if (outOfBounds(x,y)) {
             return false;
         }
-
-        if (this.color == Color.WHITE && x==this.x && y==this.y-1 && board[y][x]==null) {
-            return true;
-        } else if (this.color == Color.WHITE && this.y==6 && y==this.y-2 && board[y][x]==null) {
-            return true;
-        } else if (this.color == Color.BLACK && this.y==1 && y==this.y+2 && board[y][x]==null) {
-            return true;
-        } else  if (this.color == Color.BLACK &&x==this.x && y==this.y+1 && board[y][x]==null) {
-            return true;
-        } else if (this.color == Color.WHITE && (x==this.x-1 || x==this.x+1) && y==this.y-1) {
-            return true;
-        } else if (this.color == Color.BLACK && (x==this.x-1 || x==this.x+1) && y==this.y+1) {
-            return true;
+        if (this.color==Color.WHITE) {
+            if (board[y][x] == null) {
+                if (x==this.x && y==this.y-1) {
+                    return true;
+                } else if (this.y==6 && y==this.y-2) {
+                    return true;
+                }
+            } else if ((x==this.x-1 || x==this.x+1) && y==this.y-1) {
+                return true;
+            }
+        } else if (this.color==Color.BLACK) {
+            if (board[y][x] == null) {
+                if (this.y==1 && y==this.y+2) {
+                    return true;
+                } else if (x==this.x && y==this.y+1) {
+                    return true;
+                }
+            } else {
+                if ((x==this.x-1 || x==this.x+1) && y==this.y+1) {
+                    return true;
+                }
+            }
         }
+
+
 
         return false;
-    }
-
-    @Override
-    public void movePiece(int x, int y, ChessPiece[][] board) {
-        if (isLegal(x,y,board)) {
-            board[this.y][this.x] = null;
-            board[y][x] = new Pawn(this.color);
-            board[y][x].y = y;
-            board[y][x].x = x;
-        }
     }
 
     @Override
@@ -92,16 +101,6 @@ class Rook extends ChessPiece {
         }
         return true;
     }
-
-    @Override
-    public void movePiece(int x, int y, ChessPiece[][] board) {
-        if (isLegal(x,y,board)) {
-            board[this.y][this.x] = null;
-            board[y][x] = new Rook(this.color);
-            board[y][x].y = y;
-            board[y][x].x = x;
-        }
-    }
 }
 
 class Knight extends ChessPiece {
@@ -115,16 +114,6 @@ class Knight extends ChessPiece {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public void movePiece(int x, int y, ChessPiece[][] board) {
-        if (isLegal(x,y,board)) {
-            board[this.y][this.x] = null;
-            board[y][x] = new Knight(this.color);
-            board[y][x].y = y;
-            board[y][x].x = x;
-        }
     }
 }
 
@@ -140,16 +129,6 @@ class Bishop extends ChessPiece {
         }
         return true;
     }
-
-    @Override
-    public void movePiece(int x, int y, ChessPiece[][] board) {
-        if (isLegal(x,y,board)) {
-            board[this.y][this.x] = null;
-            board[y][x] = new Bishop(this.color);
-            board[y][x].y = y;
-            board[y][x].x = x;
-        }
-    }
 }
 
 class King extends ChessPiece {
@@ -164,16 +143,6 @@ class King extends ChessPiece {
         }
         return true;
     }
-
-    @Override
-    public void movePiece(int x, int y, ChessPiece[][] board) {
-        if (isLegal(x,y,board)) {
-            board[this.y][this.x] = null;
-            board[y][x] = new King(this.color);
-            board[y][x].y = y;
-            board[y][x].x = x;
-        }
-    }
 }
 
 class Queen extends ChessPiece {
@@ -187,15 +156,5 @@ class Queen extends ChessPiece {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public void movePiece(int x, int y, ChessPiece[][] board) {
-        if (isLegal(x,y,board)) {
-            board[this.y][this.x] = null;
-            board[y][x] = new Queen(this.color);
-            board[y][x].y = y;
-            board[y][x].x = x;
-        }
     }
 }
