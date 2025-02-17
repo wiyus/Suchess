@@ -32,6 +32,9 @@ class Pawn extends ChessPiece {
 
     @Override
     void movePiece(int x, int y) {
+        if (isLegal(x,y)) {
+
+        }
 
     }
 
@@ -52,7 +55,9 @@ class Rook extends ChessPiece {
 
     @Override
     void movePiece(int x, int y) {
+        if (isLegal(x,y)) {
 
+        }
     }
 }
 
@@ -71,7 +76,9 @@ class Knight extends ChessPiece {
 
     @Override
     void movePiece(int x, int y) {
+        if (isLegal(x,y)) {
 
+        }
     }
 }
 
@@ -90,7 +97,9 @@ class Bishop extends ChessPiece {
 
     @Override
     void movePiece(int x, int y) {
+        if (isLegal(x,y)) {
 
+        }
     }
 }
 
@@ -109,7 +118,9 @@ class King extends ChessPiece {
 
     @Override
     void movePiece(int x, int y) {
+        if (isLegal(x,y)) {
 
+        }
     }
 }
 
@@ -128,6 +139,8 @@ class Queen extends ChessPiece {
 
     @Override
     void movePiece(int x, int y) {
+        if (isLegal(x,y)) {
 
+        }
     }
 }

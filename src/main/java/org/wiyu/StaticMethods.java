@@ -9,11 +9,16 @@ public class StaticMethods {
     }
 
     public static int[] posToCoords(String coordinates) {
-        int[] newCoords = new int[2];
+        char x = coordinates.toLowerCase().charAt(0);
+        char y = coordinates.charAt(1);
 
         if (coordinates.length() != 2) {
-
+            throw new RuntimeException("Invalid format.");
+        } else if (x<'a' || x>'h' || y<'1' || y>'8') {
+            throw new RuntimeException("Invalid format.");
         }
-        return newCoords;
+
+
+        return new int[]{Math.abs(x-'a'-7), y-'1'};
     }
 }
