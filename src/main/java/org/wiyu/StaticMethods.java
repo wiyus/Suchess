@@ -21,4 +21,17 @@ public class StaticMethods {
 
         return new int[]{Math.abs(x-'a'-7), y-'1'};
     }
+
+    public static void translateBoard(ChessPiece[][] board) {
+        for (int y=0; y<board.length; y++) {
+            for (int x=0; x<board[y].length; x++) {
+                if (board[y][x] != null) {
+                    System.out.print("X ");
+                } else {
+                    System.out.print("  ");
+                }
+            }
+            System.out.println();
+        }
+    }
 }
