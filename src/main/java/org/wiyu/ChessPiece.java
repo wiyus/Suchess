@@ -38,7 +38,22 @@ class Pawn extends ChessPiece implements Promotable {
         if (outOfBounds(x,y)) {
             return false;
         }
-        return true;
+
+        if (this.color == Color.WHITE && x==this.x && y==this.y-1 && board[y][x]==null) {
+            return true;
+        } else if (this.color == Color.WHITE && this.y==6 && y==this.y-2 && board[y][x]==null) {
+            return true;
+        } else if (this.color == Color.BLACK && this.y==1 && y==this.y+2 && board[y][x]==null) {
+            return true;
+        } else  if (this.color == Color.BLACK &&x==this.x && y==this.y+1 && board[y][x]==null) {
+            return true;
+        } else if (this.color == Color.WHITE && (x==this.x-1 || x==this.x+1) && y==this.y-1) {
+            return true;
+        } else if (this.color == Color.BLACK && (x==this.x-1 || x==this.x+1) && y==this.y+1) {
+            return true;
+        }
+
+        return false;
     }
 
     @Override

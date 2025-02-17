@@ -3,6 +3,8 @@ package org.wiyu;
 
 import org.wiyu.enums.Color;
 
+import java.util.Scanner;
+
 import static org.wiyu.StaticMethods.translateBoard;
 
 public class Suchess {
@@ -37,6 +39,10 @@ public class Suchess {
                 }
             }
         }
+
+        Scanner reader = new Scanner(System.in);
+
+        board[6][3].movePiece(3,5,board);
 
         translateBoard(board);
     }
