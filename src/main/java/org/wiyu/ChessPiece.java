@@ -36,6 +36,7 @@ public abstract class ChessPiece {
     protected abstract boolean isLegal(int x, int y, ChessPiece[][] board);
 }
 
+//Pawn definition
 class Pawn extends ChessPiece implements Promotable {
     public Pawn(Color c) {
         super(Piece.PAWN, c);
@@ -46,6 +47,7 @@ class Pawn extends ChessPiece implements Promotable {
         if (outOfBounds(x,y)) {
             return false;
         }
+
         if (this.color==Color.WHITE) {
             if (board[y][x] == null) {
                 if (x==this.x && y==this.y-1) {
@@ -70,8 +72,6 @@ class Pawn extends ChessPiece implements Promotable {
             }
         }
 
-
-
         return false;
     }
 
@@ -89,6 +89,7 @@ class Pawn extends ChessPiece implements Promotable {
     }
 }
 
+//Rook definition
 class Rook extends ChessPiece {
     public Rook(Color c) {
         super(Piece.ROOK, c);
@@ -103,6 +104,7 @@ class Rook extends ChessPiece {
     }
 }
 
+//Knight definition
 class Knight extends ChessPiece {
     public Knight(Color c) {
         super(Piece.KNIGHT, c);
@@ -117,6 +119,7 @@ class Knight extends ChessPiece {
     }
 }
 
+//Bishop definition
 class Bishop extends ChessPiece {
     public Bishop(Color c) {
         super(Piece.BISHOP, c);
@@ -131,6 +134,7 @@ class Bishop extends ChessPiece {
     }
 }
 
+//King definition
 class King extends ChessPiece {
     public King(Color c) {
         super(Piece.KING, c);
@@ -145,6 +149,7 @@ class King extends ChessPiece {
     }
 }
 
+//Queen definition
 class Queen extends ChessPiece {
     public Queen(Color c) {
         super(Piece.QUEEN, c);

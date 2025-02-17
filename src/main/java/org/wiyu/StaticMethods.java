@@ -6,7 +6,7 @@ public class StaticMethods {
             return true;
         }
         return false;
-    }
+    } // Prevents the isLegal method from firing off if the parameters are invalid
 
     public static int[] posToCoords(String coordinates) {
         char x = coordinates.toLowerCase().charAt(0);
